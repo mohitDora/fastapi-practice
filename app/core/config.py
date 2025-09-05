@@ -42,4 +42,4 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_EMAIL: str = "admin@example.com"
     FIRST_SUPERUSER_PASSWORD: str = "changethis"
 
-Settings = Settings()
+settings = Settings()
