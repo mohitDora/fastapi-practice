@@ -27,14 +27,9 @@ class UserRegister(SQLModel):
     pass
 
 
-class UserUpdateMe(SQLModel):
-    username: Optional[str] = None
-    email: Optional[str] = None
-
-
-class UpdatePassword(SQLModel):
-    current_password: str
-    new_password: str
+class UserUpdate(UserBase):
+    email: Optional[str] = None  # type: ignore
+    password: Optional[str] = None
 
 
 class UserPublic(UserBase):
