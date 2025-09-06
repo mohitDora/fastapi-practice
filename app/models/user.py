@@ -12,7 +12,7 @@ class UserBase(SQLModel):
     is_superuser: bool = False
 
 
-class User(UserBase):
+class User(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     hashed_password: str
 
@@ -24,7 +24,14 @@ class UserCreate(UserBase):
 
 
 class UserRegister(SQLModel):
-    pass
+    email: str
+    password: str
+    username: str
+
+
+class UserLogin(SQLModel):
+    email: str
+    password: str
 
 
 class UserUpdate(UserBase):

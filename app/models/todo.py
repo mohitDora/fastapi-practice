@@ -12,7 +12,7 @@ class TodoBase(SQLModel):
     is_completed: bool = Field(default=False)
 
 
-class Todo(TodoBase):
+class Todo(TodoBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     created_at: datetime = Field(default=datetime.utcnow())
     updated_at: Optional[datetime] = Field(default=None)

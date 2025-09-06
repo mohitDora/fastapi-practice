@@ -25,16 +25,12 @@ class CRUDTodo(CRUDBase[Todo, TodoCreate, TodoUpdate]):
         skip: int = 0,
         limit: int = 100,
         completed: Optional[bool] = None,
-        priority: Optional[str] = None
     ) -> list[Todo]:
         statement = select(Todo).where(Todo.owner_id == owner_id)
-        
+
         if completed is not None:
             statement = statement.where(Todo.is_completed == completed)
-        
-        if priority:
-            statement = statement.where(Todo.priority == priority)
-        
+
         statement = statement.offset(skip).limit(limit).order_by(Todo.created_at.desc())
         return list(session.exec(statement).all())
 
@@ -45,9 +41,9 @@ class CRUDTodo(CRUDBase[Todo, TodoCreate, TodoUpdate]):
             update_data = obj_in
         else:
             update_data = obj_in.model_dump(exclude_unset=True)
-        
+
         update_data["updated_at"] = datetime.utcnow()
-        
+
         return super().update(session, db_obj=db_obj, obj_in=update_data)
 
     def get_by_owner(
